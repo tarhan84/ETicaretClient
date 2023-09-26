@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderComponent } from './order/order.component';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -13,7 +14,10 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule.forChild([
       {path : "", component : OrderComponent}
-    ])
+    ]),
+    NgxSpinnerModule
   ]
 })
-export class OrderModule { }
+export class OrderModule {
+
+}
