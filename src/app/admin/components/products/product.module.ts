@@ -4,7 +4,6 @@ import { ProductComponent } from './product/product.component';
 import { RouterModule } from '@angular/router';
 
 
-
 @NgModule({
   declarations: [
     ProductComponent
