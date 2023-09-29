@@ -13,6 +13,6 @@ export class OrderComponent extends BaseComponent{
   }
 
   ngOnInit() : void{
-    this.showSpinnerWithDuration(SpinnerTypes.Timer, 5)
+    //this.showSpinnerWithDuration(SpinnerTypes.Timer, 5)
   }
 }

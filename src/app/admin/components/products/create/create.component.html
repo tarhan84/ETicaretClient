@@ -1,0 +1,15 @@
+<form  [formGroup]="createProductForm" class="row g-3" (ngSubmit)="saveProduct()">
+    <div class="input-group">
+        <span class="input-group-text">Name</span>
+        <input type="text" aria-label="Name" class="form-control" id="productName" formControlName="productName">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Price</span>
+        <input type="number" aria-label="Price" class="form-control" id="productPrice" formControlName="productPrice">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Stock</span>
+        <input type="number" aria-label="Stock" class="form-control" id="productStock" formControlName="productStock">
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Save New Product</button>
+</form>

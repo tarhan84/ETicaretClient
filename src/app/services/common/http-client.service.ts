@@ -14,16 +14,22 @@ export class HttpClientService {
     return this.httpClient.get<T>(url, {headers : requestParameters.headers});
   }
 
-  post() {
-
+  post<T>(requestParameters: Partial<RequestParameters>, body?: Partial<T>): Observable<T> {
+    let url = `${this.url(requestParameters)}`;
+    if (requestParameters.fullEndpoint != null) url = requestParameters.fullEndpoint;
+    return this.httpClient.post<T>(url, body, {headers : requestParameters.headers});
   }
 
-  put() {
-
+  put<T>(requestParameters: Partial<RequestParameters>, body?: Partial<T>): Observable<T> {
+    let url = `${this.url(requestParameters)}`;
+    if (requestParameters.fullEndpoint != null) url = requestParameters.fullEndpoint;
+    return this.httpClient.put<T>(url, body, {headers : requestParameters.headers});
   }
 
-  delete() {
-
+  delete<T>(requestParameters: Partial<RequestParameters>, id?: string): Observable<T>{
+    let url = `${this.url(requestParameters)}/${id}`;
+    if (requestParameters.fullEndpoint != null) url = requestParameters.fullEndpoint;
+    return this.httpClient.delete<T>(url, {headers : requestParameters.headers});
   }
 
   private url(requestParameter: Partial<RequestParameters>): string {

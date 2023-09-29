@@ -1,7 +1,18 @@
-<ul class="list-group">
-    <li class="list-group-item" routerLink="/admin">Dashboard</li>
-    <li class="list-group-item" routerLink="customers">Customers</li>
-    <li class="list-group-item" routerLink="products">Products</li>
-    <li class="list-group-item" routerLink="orders">Orders</li>
-    <li class="list-group-item" routerLink="">Home</li>
-</ul>
+<div class="row">
+    <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" routerLink="/admin" checked>
+        <label class="btn btn-outline-success" for="vbtn-radio1">Dashboard</label>
+
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off" routerLink="customers">
+        <label class="btn btn-outline-success" for="vbtn-radio2">Customers</label>
+
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off" routerLink="products">
+        <label class="btn btn-outline-success" for="vbtn-radio3">Products</label>
+
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off" routerLink="orders">
+        <label class="btn btn-outline-success" for="vbtn-radio4">Orders</label>
+
+        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off" routerLink="">
+        <label class="btn btn-outline-success" for="vbtn-radio5">Home</label>
+      </div>
+</div>
