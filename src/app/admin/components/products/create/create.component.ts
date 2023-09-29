@@ -6,7 +6,6 @@ import { BaseResponse } from 'src/app/contracts/base-response';
 import { Product } from 'src/app/contracts/product';
 import { AlertifyService, MessagePositions, MessageTypes } from 'src/app/services/admin/alertify.service';
 import { ProductServiceService } from 'src/app/services/admin/product.service';
-import { HttpClientService } from 'src/app/services/common/http-client.service';
 
 @Component({
   selector: 'app-create',
@@ -18,27 +17,35 @@ export class CreateComponent extends BaseComponent {
 
   createProductForm: FormGroup;
 
-  constructor(private productService: ProductServiceService, 
-    spinner: NgxSpinnerService, 
-    private alertify: AlertifyService, 
+  fieldErrors = {
+    productName: true,
+    productPrice: true,
+    productStock: true,
+  };
+
+  constructor(private productService: ProductServiceService,
+    spinner: NgxSpinnerService,
+    private alertify: AlertifyService,
     private formBuilder: FormBuilder) {
-      super(spinner)
-      this.createProductForm = this.formBuilder.group({
-        productName: ['', Validators.required],
-        productPrice: [0, [Validators.required, Validators.min(0)]],
-        productStock: [0, [Validators.required, Validators.min(0)]]
-      });
+    super(spinner)
+    this.createProductForm = this.formBuilder.group({
+      productName: ['', Validators.required],
+      productPrice: [0, [Validators.required, Validators.min(0)]],
+      productStock: [0, [Validators.required, Validators.min(0)]]
+    });
   }
 
   async saveProduct() {
-    if(!this.createProductForm.valid){
+    if (!this.createProductForm.valid) {
       return;
     }
     this.showSpinner(SpinnerTypes.BallElasticDots);
-    var product: Product = { 
-      name: this.createProductForm.get("productName")?.value, 
-      price: this.createProductForm.get("productPrice")?.value, 
-      stock: this.createProductForm.get("productStock")?.value };
+    var product: Product = {
+      name: this.createProductForm.get("productName")?.value,
+      price: this.createProductForm.get("productPrice")?.value,
+      stock: this.createProductForm.get("productStock")?.value
+    };
+
     var response: BaseResponse = await this.productService.create(product);
     this.hideSpinner(SpinnerTypes.BallElasticDots);
     console.log(response);
@@ -48,5 +55,22 @@ export class CreateComponent extends BaseComponent {
     else {
       this.alertify.message(`Error occurred : ${response.error?.message}`, MessageTypes.Error, MessagePositions.TopRight, 10);
     }
+    //test için kapatıldı
+    //this.createProductForm.reset();
+  }
+
+  nameOnInputBlur() {
+    this.fieldErrors.productName = !!this.createProductForm.get("productName")?.valid;
+    console.log(this.fieldErrors);
+  }
+
+  priceOnInputBlur() {
+    this.fieldErrors.productPrice = !!this.createProductForm.get("productPrice")?.valid;
+    console.log(this.fieldErrors);
+  }
+
+  stockOnInputBlur() {
+    this.fieldErrors.productStock = !!this.createProductForm.get("productStock")?.valid;
+    console.log(this.fieldErrors);
   }
 }

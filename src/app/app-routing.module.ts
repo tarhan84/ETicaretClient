@@ -7,7 +7,7 @@ import { HomeComponent } from './ui/components/home/home/home.component';
 const routes: Routes = [
   {
     path: "admin", component: LayoutComponent, children: [
-      { path: "", component: DashboardComponent },
+      { path: "dashboard", component: DashboardComponent },
       { path: "customers", loadChildren: () => import("./admin/components/customers/customer.module").then(module => module.CustomerModule) },
       { path: "orders", loadChildren: () => import("./admin/components/orders/order.module").then(module => module.OrderModule) },
       { path: "products", loadChildren: () => import("./admin/components/products/product.module").then(module => module.ProductModule) }

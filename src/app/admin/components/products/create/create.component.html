@@ -1,15 +1,21 @@
 <form  [formGroup]="createProductForm" class="row g-3" (ngSubmit)="saveProduct()">
     <div class="input-group">
         <span class="input-group-text">Name</span>
-        <input type="text" aria-label="Name" class="form-control" id="productName" formControlName="productName">
+        <input type="text" aria-label="Name" class="form-control" id="productName" formControlName="productName"  (blur)="nameOnInputBlur()">
     </div>
+    
     <div class="input-group">
         <span class="input-group-text">Price</span>
-        <input type="number" aria-label="Price" class="form-control" id="productPrice" formControlName="productPrice">
+        <input type="number" aria-label="Price" class="form-control" id="productPrice" formControlName="productPrice"  (blur)="priceOnInputBlur()">
     </div>
+    
     <div class="input-group">
         <span class="input-group-text">Stock</span>
-        <input type="number" aria-label="Stock" class="form-control" id="productStock" formControlName="productStock">
+        <input type="number" aria-label="Stock" class="form-control" id="productStock" formControlName="productStock" (blur)="stockOnInputBlur()">
     </div>
-    <button type="submit" class="btn btn-primary mb-3">Save New Product</button>
+    
+    <button [disabled]="!createProductForm.valid" type="submit" class="btn btn-primary mb-3">Save New Product</button>
+    <span *ngIf="!(fieldErrors.productName || createProductForm.valid)">Product name cannot be null!</span>
+    <span *ngIf="!(fieldErrors.productPrice || createProductForm.valid)">Product price must greater or equals zero</span>
+    <span *ngIf="!(fieldErrors.productStock || createProductForm.valid)">Product stock must greater or equals zero</span>
 </form>
