@@ -5,7 +5,7 @@ import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
 import { BaseResponse } from 'src/app/contracts/base-response';
 import { Product } from 'src/app/contracts/product';
 import { AlertifyService, MessagePositions, MessageTypes } from 'src/app/services/admin/alertify.service';
-import { ProductServiceService } from 'src/app/services/admin/product.service';
+import { ProductService } from 'src/app/services/admin/product.service';
 
 @Component({
   selector: 'app-create',
@@ -23,7 +23,7 @@ export class CreateComponent extends BaseComponent {
     productStock: true,
   };
 
-  constructor(private productService: ProductServiceService,
+  constructor(private productService: ProductService,
     spinner: NgxSpinnerService,
     private alertify: AlertifyService,
     private formBuilder: FormBuilder) {

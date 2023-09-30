@@ -7,7 +7,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductServiceService {
+export class ProductService {
 
   constructor(private httpClient: HttpClientService) { }
 
@@ -16,6 +16,46 @@ export class ProductServiceService {
 
     try {
       const data = await this.httpClient.post<Product>({ controller: 'product' }, product).toPromise();
+      response.data = data;
+      response.success = true;
+    } catch (error) {
+      response.error = error as HttpErrorResponse;
+      response.success = false;
+    }
+    return response;
+  }
+
+  async get(productId: string) : Promise<BaseResponse>{
+    const response = new BaseResponse();
+    try {
+      const data = await this.httpClient.get<Product>({ controller: 'product' }, productId).toPromise();
+      response.data = data;
+      response.success = true;
+    } catch (error) {
+      response.error = error as HttpErrorResponse;
+      response.success = false;
+    }
+    return response;
+  }
+
+  async update(product: Product): Promise<BaseResponse> {
+    const response = new BaseResponse();
+
+    try {
+      const data = await this.httpClient.put<Product>({ controller: 'product' }, product).toPromise();
+      response.data = data;
+      response.success = true;
+    } catch (error) {
+      response.error = error as HttpErrorResponse;
+      response.success = false;
+    }
+    return response;
+  }
+
+  async getAll() : Promise<BaseResponse>{
+    const response = new BaseResponse();
+    try {
+      const data = await this.httpClient.get<Product[]>({ controller: 'product' }).toPromise();
       response.data = data;
       response.success = true;
     } catch (error) {

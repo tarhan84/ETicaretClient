@@ -1,0 +1,34 @@
+<form [formGroup]="updateProductForm" class="row g-3" (ngSubmit)="updateProduct()">
+
+    <div class="input-group">
+        <span class="input-group-text">Id</span>
+        <input type="text" aria-label="Id" class="form-control" id="productId" formControlName="productId"
+            (blur)="idOnInputBlur()">
+        <button [disabled]="!fieldErrors.productId" type="button" (click)="getProduct()" class="btn btn-primary">Get
+            Product</button>
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Name</span>
+        <input type="text" aria-label="Name" class="form-control" id="productName"
+            formControlName="productName" (blur)="nameOnInputBlur()">
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Price</span>
+        <input type="number" aria-label="Price" class="form-control" id="productPrice" formControlName="productPrice"
+            (blur)="priceOnInputBlur()">
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-text">Stock</span>
+        <input type="number" aria-label="Stock" class="form-control" id="productStock" formControlName="productStock"
+            (blur)="stockOnInputBlur()">
+    </div>
+
+    <button [disabled]="!updateProductForm.valid" type="submit" class="btn btn-primary mb-3">Update Product</button>
+    <span *ngIf="!(fieldErrors.productName || updateProductForm.valid)">Product name cannot be null!</span>
+    <span *ngIf="!(fieldErrors.productPrice || updateProductForm.valid)">Product price must greater or equals
+        zero</span>
+    <span *ngIf="!(fieldErrors.productStock || updateProductForm.valid)">Product stock must greater or equals
+        zero</span>
+</form>

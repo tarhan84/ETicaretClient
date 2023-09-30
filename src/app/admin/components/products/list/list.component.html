@@ -1,1 +1,25 @@
-<p>list works!</p>
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="th-sm">Name
+            </th>
+            <th class="th-sm">Price ($)
+            </th>
+            <th class="th-sm">Stock
+            </th>
+            <th class="th-sm">Created Date
+            </th>
+            <th class="th-sm">Updated Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.stock}}</td>
+            <td>{{convertDateTime(product.createDateTime)}}</td>
+            <td>{{convertDateTime(product.updatedDateTime)}}</td>
+        </tr>
+    </tbody>
+</table>

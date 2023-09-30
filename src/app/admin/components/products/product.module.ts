@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UpdateComponent } from './update/update.component';
 
 
 @NgModule({
   declarations: [
     ProductComponent,
     CreateComponent,
-    ListComponent
+    ListComponent,
+    UpdateComponent
   ],
   imports: [
     CommonModule,
