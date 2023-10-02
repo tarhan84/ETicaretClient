@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
 import { BaseResponse } from 'src/app/contracts/base-response';
+import { Product } from 'src/app/contracts/product';
 import { AlertifyService, MessagePositions, MessageTypes } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/admin/product.service';
 
@@ -13,6 +14,9 @@ import { ProductService } from 'src/app/services/admin/product.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent {
+  updateFromList(_t14: number) {
+    throw new Error('Method not implemented.');
+  }
   products: any;
 
   constructor(
@@ -50,8 +54,28 @@ export class ListComponent extends BaseComponent {
     const minutes = date.getMinutes().toString().padStart(2, '0');
     const seconds = date.getSeconds().toString().padStart(2, '0');
 
-    if(year < 10) return "--"
+    if (year < 10) return "--"
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+  }
+
+  async deleteFromList(index: number) {
+    let productId: string = this.products[index].id;
+    this.showSpinner(SpinnerTypes.BallElasticDots);
+    var response: BaseResponse = await this.productService.delete(productId)
+    this.hideSpinner(SpinnerTypes.BallElasticDots);
+    if (response.success) {
+      this.products = response.data;
+      console.log(this.products);
+      this.alertify.message(`Product deletet with Id : ${productId}`, MessageTypes.Success, MessagePositions.TopRight, 5);
+      this.refreshList();
+    }
+    else {
+      this.alertify.message(`Error occurred : ${response.error?.message}`, MessageTypes.Error, MessagePositions.TopRight, 10);
+    }
+  }
+
+  refreshList(){
+    this.getAllProduct();
   }
 }
 

@@ -64,4 +64,17 @@ export class ProductService {
     }
     return response;
   }
+
+  async delete(id: string): Promise<BaseResponse>{
+    const response = new BaseResponse();
+    try {
+      const data = await this.httpClient.delete<Product[]>({ controller: 'product' }, id).toPromise();
+      response.data = data;
+      response.success = true;
+    } catch (error) {
+      response.error = error as HttpErrorResponse;
+      response.success = false;
+    }
+    return response;
+  }
 }
