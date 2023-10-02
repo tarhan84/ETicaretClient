@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
 import { BaseResponse } from 'src/app/contracts/base-response';
@@ -18,11 +19,14 @@ export class ListComponent extends BaseComponent {
     throw new Error('Method not implemented.');
   }
   products: any;
+  beforeClick: string = "";
+  beforeDirection: number = 0;
 
   constructor(
     private productService: ProductService,
     spinner: NgxSpinnerService,
-    private alertify: AlertifyService) {
+    private alertify: AlertifyService,
+    private router: Router) {
     super(spinner);
   }
 
@@ -41,6 +45,7 @@ export class ListComponent extends BaseComponent {
     }
     else {
       this.alertify.message(`Error occurred : ${response.error?.message}`, MessageTypes.Error, MessagePositions.TopRight, 10);
+      //this.router.navigate(['admin/dashboard']);
     }
   }
 
@@ -79,6 +84,24 @@ export class ListComponent extends BaseComponent {
 
   refreshList() {
     this.getAllProduct();
+  }
+
+  
+  sort(columbName: string){
+    if(this.beforeClick == columbName){
+      if(this.beforeDirection == 0){
+        this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] > b[columbName] ? 1 : -1));
+      }
+      else{
+        this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] < b[columbName] ? 1 : -1));
+      }
+    }
+    else{
+      this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] > b[columbName] ? 1 : -1));
+    }
+    this.beforeDirection = this.beforeDirection == 1 ? 0 : 1;
+    this.beforeClick = columbName;
+  
   }
 }
 

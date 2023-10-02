@@ -1,14 +1,14 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-    <thead>
-        <tr>
-            <th class="th-sm">#</th>
-            <th class="th-sm">Name</th>
-            <th class="th-sm">Price ($)</th>
-            <th class="th-sm">Stock</th>
-            <th class="th-sm">Created Date</th>
-            <th class="th-sm">Updated Date</th>
-        </tr>
-    </thead>
+        <thead>
+            <tr>
+                <th class="th-sm">#</th>
+                <th class="th-sm" (click)="sort('name')">Name <i class="fa fa-sort"></i></th>
+                <th class="th-sm" (click)="sort('price')">Price ($) <i class="fa fa-sort"></i></th>
+                <th class="th-sm" (click)="sort('stock')">Stock <i class="fa fa-sort"></i></th>
+                <th class="th-sm" (click)="sort('createDateTime')">Created Date <i class="fa fa-sort"></i></th>
+                <th class="th-sm" (click)="sort('updatedDateTime')">Updated Date <i class="fa fa-sort"></i></th>
+            </tr>
+        </thead>
     <tbody>
         <tr *ngFor="let product of products; let i = index">
             <td>{{i+1}}</td>
@@ -21,4 +21,6 @@
             <td><button class="btn btn-outline-primary" (click)="updateFromList(i)">update</button></td>
         </tr>
     </tbody>
+    <div class="card-footer pb-0 pt-3">
+    </div>
 </table>

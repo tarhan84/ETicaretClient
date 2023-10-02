@@ -87,6 +87,10 @@ export class UpdateComponent extends BaseComponent{
     this.hideSpinner(SpinnerTypes.BallElasticDots);
     console.log(result);
     if (result.success) {
+      if(result.data == null){
+        this.alertify.message(`Product not found with id : ${productId}`, MessageTypes.Warning, MessagePositions.TopRight, 10);
+        return;
+      }
       this.alertify.message(`Product received!`, MessageTypes.Success, MessagePositions.TopRight, 5);
     }
     else {
