@@ -7,6 +7,7 @@ import { BaseResponse } from 'src/app/contracts/base-response';
 import { Product } from 'src/app/contracts/product';
 import { AlertifyService, MessagePositions, MessageTypes } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/admin/product.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
@@ -15,9 +16,7 @@ import { ProductService } from 'src/app/services/admin/product.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent {
-  updateFromList(_t14: number) {
-    throw new Error('Method not implemented.');
-  }
+
   products: any;
   beforeClick: string = "";
   beforeDirection: number = 0;
@@ -26,7 +25,8 @@ export class ListComponent extends BaseComponent {
     private productService: ProductService,
     spinner: NgxSpinnerService,
     private alertify: AlertifyService,
-    private router: Router) {
+    private router: Router,
+    private clipboard: Clipboard) {
     super(spinner);
   }
 
@@ -86,22 +86,31 @@ export class ListComponent extends BaseComponent {
     this.getAllProduct();
   }
 
-  
-  sort(columbName: string){
-    if(this.beforeClick == columbName){
-      if(this.beforeDirection == 0){
+
+  sort(columbName: string) {
+    if (this.beforeClick == columbName) {
+      if (this.beforeDirection == 0) {
         this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] > b[columbName] ? 1 : -1));
       }
-      else{
+      else {
         this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] < b[columbName] ? 1 : -1));
       }
     }
-    else{
+    else {
       this.products.sort((a: { [x: string]: number; }, b: { [x: string]: number; }) => (a[columbName] > b[columbName] ? 1 : -1));
     }
     this.beforeDirection = this.beforeDirection == 1 ? 0 : 1;
     this.beforeClick = columbName;
-  
+
+  }
+
+  copyToClipboard(productId: string) {
+    this.alertify.message(`${productId} copied to clipboard`, MessageTypes.Warning, MessagePositions.TopRight, 3);
+    this.clipboard.copy(productId);
+  }
+
+  updateFromList(_t14: number) {
+    throw new Error('Method not implemented.');
   }
 }
 
