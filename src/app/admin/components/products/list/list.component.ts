@@ -59,22 +59,25 @@ export class ListComponent extends BaseComponent {
   }
 
   async deleteFromList(index: number) {
-    let productId: string = this.products[index].id;
-    this.showSpinner(SpinnerTypes.BallElasticDots);
-    var response: BaseResponse = await this.productService.delete(productId)
-    this.hideSpinner(SpinnerTypes.BallElasticDots);
-    if (response.success) {
-      this.products = response.data;
-      console.log(this.products);
-      this.alertify.message(`Product deletet with Id : ${productId}`, MessageTypes.Success, MessagePositions.TopRight, 5);
-      this.refreshList();
-    }
-    else {
-      this.alertify.message(`Error occurred : ${response.error?.message}`, MessageTypes.Error, MessagePositions.TopRight, 10);
+    const result = window.confirm('Are you sure you want to delete this product?');
+    if (result) {
+      let productId: string = this.products[index].id;
+      this.showSpinner(SpinnerTypes.BallElasticDots);
+      var response: BaseResponse = await this.productService.delete(productId)
+      this.hideSpinner(SpinnerTypes.BallElasticDots);
+      if (response.success) {
+        this.products = response.data;
+        console.log(this.products);
+        this.alertify.message(`Product deletet with Id : ${productId}`, MessageTypes.Success, MessagePositions.TopRight, 5);
+        this.refreshList();
+      }
+      else {
+        this.alertify.message(`Error occurred : ${response.error?.message}`, MessageTypes.Error, MessagePositions.TopRight, 10);
+      }
     }
   }
 
-  refreshList(){
+  refreshList() {
     this.getAllProduct();
   }
 }
