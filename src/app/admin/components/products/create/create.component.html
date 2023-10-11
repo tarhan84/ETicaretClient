@@ -19,3 +19,4 @@
     <span *ngIf="!(fieldErrors.productPrice || createProductForm.valid)">Product price must greater or equals zero</span>
     <span *ngIf="!(fieldErrors.productStock || createProductForm.valid)">Product stock must greater or equals zero</span>
 </form>
+<app-file-upload [options]="fileUploadOptions"></app-file-upload>

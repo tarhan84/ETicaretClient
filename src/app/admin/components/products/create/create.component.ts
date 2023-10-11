@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinner, NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerTypes } from 'src/app/base/base.component';
@@ -6,6 +6,7 @@ import { BaseResponse } from 'src/app/contracts/base-response';
 import { Product } from 'src/app/contracts/product';
 import { AlertifyService, MessagePositions, MessageTypes } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/admin/product.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-create',
@@ -21,6 +22,14 @@ export class CreateComponent extends BaseComponent {
     productName: true,
     productPrice: true,
     productStock: true,
+  };
+
+  @Output()
+  fileUploadOptions: Partial<FileUploadOptions> = {
+    action: "upload",
+    controller: "products",
+    description: "Select photo for products",
+    accept: ".png, .jpg, .jpeg"
   };
 
   constructor(private productService: ProductService,

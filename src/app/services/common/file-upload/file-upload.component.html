@@ -1,0 +1,23 @@
+<div class="center">
+    <ngx-file-drop dropZoneLabel="Drop files here" [accept]="options.accept!" (onFileDrop)="selectedFiles($event)">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+            Upload a file
+            <button class="btn btn-primary m-lg-2" type="button" (click)="openFileSelector()">Browse</button>
+        </ng-template>
+    </ngx-file-drop>
+    <div class="upload-table" *ngIf="files.length > 0">
+        <table class="table table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Selected Files</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i=index">
+                    <td>{{ item.relativePath }}</td>
+                    <td><button class="btn btn-outline-danger" style="align-items: self-end;" (click)="deleteFileFromList(i)">delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
