@@ -29,7 +29,7 @@ export class CreateComponent extends BaseComponent {
     action: "upload",
     controller: "products",
     description: "Select photo for products",
-    accept: ".png, .jpg, .jpeg"
+    accept: ".png, .jpg, .jpeg, .gif"
   };
 
   constructor(private productService: ProductService,
