@@ -27,9 +27,9 @@ export class CreateComponent extends BaseComponent {
   @Output()
   fileUploadOptions: Partial<FileUploadOptions> = {
     action: "upload",
-    controller: "products",
+    controller: "product",
     description: "Select photo for products",
-    accept: ".png, .jpg, .jpeg, .gif"
+    accept: "*"
   };
 
   constructor(private productService: ProductService,
